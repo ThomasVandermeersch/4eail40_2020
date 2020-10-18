@@ -26,28 +26,31 @@ func main() {
 	}
 }
 
+var game = model.Board8{}
+
 func runCommand(commandStr string) (e error) {
 	commandStr = strings.TrimSuffix(commandStr, "\n")
 	args := strings.Fields(commandStr)
+
 	switch args[0] {
-	case "exit":
-		os.Exit(0)
-	// add another case here for custom commands.
-	case "new":
-		a := model.Board8{}
-		a.Initialize()
-		a.String()
-		// TODO Create a new game on a classic 8x8 board.
-		// TODO Display the board on console.
-		break
-	case "move":
-		// TODO Move a piece. (syntax: move <from> <to>)
-		// TODO The command line should be in the form of move A2 A4.
-		// TODO     => meaning move piece from position A2 to A4
-		// TODO Display the board on console.
-		break
-	default:
-		e = fmt.Errorf("unknown command %s", args[0])
-	}
+		case "exit":
+			os.Exit(0)
+		case "new":
+			game.Initialize()
+			game.String()
+			break
+		case "move":
+			game.Move(args[1],args[2],args[3],args[4])
+			game.String()
+
+
+			// TODO Move a piece. (syntax: move <from> <to>)
+			// TODO The command line should be in the form of move A2 A4.
+			// TODO     => meaning move piece from position A2 to A4
+			// TODO Display the board on console.
+			break
+		default:
+			e = fmt.Errorf("unknown command %s", args[0])
+		}
 	return
 }

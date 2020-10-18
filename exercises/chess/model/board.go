@@ -2,6 +2,7 @@
 package model
 
 import "fmt"
+import "strconv"
 //TODO Implement type Board
 
 type Board interface{
@@ -10,11 +11,6 @@ type Board interface{
 
 type Coord interface{
 
-}
-
-type Piece struct{
-	Name string
-	Couleur string
 }
 
 type Coord2D struct{
@@ -31,6 +27,8 @@ func (board8 *Board8) Initialize() {
 	for x:=0 ; x < 8 ; x++{
 		for y:=0; y < 8 ; y++{
 			coord := Coord2D{x,y}
+			
+			
 			piece := Piece{"-","action"}
 			
 			//Placement des pions
@@ -93,4 +91,19 @@ func(board8 *Board8) String() {
 	}
 	fmt.Println( result)
 
+}
+
+func (board8 *Board8) Move(xx1, yy1 , xx2, yy2 string){
+	x1, err := strconv.Atoi(xx1)
+	y1, err := strconv.Atoi(yy1)
+	x2, err := strconv.Atoi(xx2)
+	y2, err := strconv.Atoi(yy2)
+	if(err ==nil){	
+		fromCoord := Coord2D{x1,y1}
+		toCoord := Coord2D{x2,y2}
+
+		piece := board8.board[toCoord]
+		board8.board[toCoord] = board8.board[fromCoord]
+		board8.board[fromCoord] = piece	
+	}
 }
