@@ -1,8 +1,4 @@
 package main
-
-// En gros, un package c'est un répertoire qui contient des fichiers/des bouts de code , qu'on va vouloir utiliser
-//souvent, donc au lieu de réécrire les fonctions, on importe un package.
-//Pour qu'un fichier soit exécutable tout seul, il doit se retrouver dans le package main
 import (
 	"bufio"
 	"fmt"
@@ -42,12 +38,6 @@ func runCommand(commandStr string) (e error) {
 		case "move":
 			game.Move(args[1],args[2],args[3],args[4])
 			game.String()
-
-
-			// TODO Move a piece. (syntax: move <from> <to>)
-			// TODO The command line should be in the form of move A2 A4.
-			// TODO     => meaning move piece from position A2 to A4
-			// TODO Display the board on console.
 			break
 		default:
 			e = fmt.Errorf("unknown command %s", args[0])
