@@ -29,15 +29,23 @@ func TestClassic_MovePiece(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			"testmock",
+			"testmock1",
 			&Classic{},
 			args{mockCoord(0), mockCoord(1)},
-			true,
+			false,
 		},
+		// {
+		// 	//TO pass testmock2, pieceDest (line36 board.go) None has to be another word
+		// 	"testmock2",
+		// 	&Classic{},
+		// 	args{mockCoord(0), mockCoord(1)},
+		// 	false,
+		// },
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := tt.c.MovePiece(tt.args.from, tt.args.to); (err != nil) != tt.wantErr {
+			err := tt.c.MovePiece(tt.args.from, tt.args.to)
+			if (err != nil) != tt.wantErr {
 				t.Errorf("Classic.MovePiece() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})

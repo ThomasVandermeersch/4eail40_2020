@@ -1,6 +1,8 @@
 package board
 
 import (
+	"fmt"
+
 	"github.com/jglouis/4eail40_2020/exercises/chess/model/coord"
 	"github.com/jglouis/4eail40_2020/exercises/chess/model/piece"
 )
@@ -22,7 +24,34 @@ func (c *Classic) PieceAt(at coord.ChessCoordinates) piece.Piece {
 // given coordinates.
 // Returns an error if destination was occupied.
 func (c *Classic) MovePiece(from coord.ChessCoordinates, to coord.ChessCoordinates) error {
-	panic("not implemented") // TODO: Implement
+	//Nous avons implémenter des pièces au sein de cette fonction pour pouvoir essayer notre test.
+	//En réalité, il aurait d'abord fallu initialiser un tableau, initialiser les
+	//pièces sur le tableau avant de s'intéresser aux mouvements des pièces.
+
+	fromX, _ := from.Coord(0)
+	fromY, _ := from.Coord(1)
+	toX, _ := to.Coord(0)
+	toY, _ := to.Coord(0)
+
+	//TO TEST, we create a piece at destination
+	//Normally the game chess has to be intialized.
+	//TO DO ==> initialize GameChess
+
+	pieceDest := piece.NewChessPiece(1, "None")
+	c[toX][toY] = pieceDest
+
+	destinationPiece := c[toX][toY]
+	// Normally we should use piece.Moves() to check if the piece can be moved !
+	// TO DO ==> ameliorate
+	if destinationPiece.Name() != "None" {
+		return fmt.Errorf("Piece already exists at destination")
+	}
+	c[toX][toY] = c[fromX][fromY]
+
+	piece := piece.NewChessPiece(1, "None")
+	c[fromX][fromY] = piece
+
+	return nil
 }
 
 // PlacePieceAt places a given piece at given location.

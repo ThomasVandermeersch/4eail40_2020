@@ -15,4 +15,6 @@ type Piece interface {
 	Color() player.Color
 	// Moves returns a set of valid move.
 	Moves(isCapture bool) map[coord.ChessCoordinates]bool
+	//Returns  name of a piece
+	Name() string
 }
